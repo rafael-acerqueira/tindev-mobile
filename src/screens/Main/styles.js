@@ -68,3 +68,10 @@ export const ButtonsContainer = styled.View`
 	flex-direction: row;
 	margin-bottom: 30px;
 `
+
+export const Empty = styled.Text`
+	align-self: center;
+	color: #999;
+	font-size: 24px;
+	font-weight: bold;
+`
