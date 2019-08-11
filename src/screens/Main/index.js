@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Image } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
+import { Image, TouchableOpacity } from 'react-native'
 import api from '../../services/api'
 import {
 	Container,
@@ -50,9 +51,18 @@ const Main = ({ navigation }) => {
 		})
 		setDevs(devs.filter(dev => dev._id !== id))
 	}
+
+	const handleLogout = async () => {
+		await AsyncStorage.clear()
+		navigation.navigate('Login')
+	}
+
 	return (
 		<Container>
-			<Logo source={logo} />
+			<TouchableOpacity onPress={handleLogout}>
+				<Logo source={logo} />
+			</TouchableOpacity>
+
 			<CardsContainer>
 				{devs.length > 0 ? (
 					devs.map((dev, index) => (

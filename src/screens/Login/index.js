@@ -9,8 +9,8 @@ const Login = ({ navigation }) => {
 	const [username, setUsername] = useState('')
 
 	useEffect(() => {
-		const getUsers = () => {
-			const user = AsyncStorage.getItem('user')
+		const getUsers = async () => {
+			const user = await AsyncStorage.getItem('user')
 			if (user) {
 				navigation.navigate('Main', { user })
 			}
