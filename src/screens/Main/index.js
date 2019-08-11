@@ -34,22 +34,25 @@ const Main = ({ navigation }) => {
 		loadusers()
 	}, [id])
 
-	const handleLike = async id => {
-		await api.post(`devs/${id}/likes`, null, {
+	const handleLike = async () => {
+		const [dev, ...rest] = devs
+
+		await api.post(`devs/${dev._id}/likes`, null, {
 			headers: {
 				user: id
 			}
 		})
-		setDevs(devs.filter(dev => dev._id !== id))
+		setDevs(rest)
 	}
 
-	const handleDislike = async id => {
-		await api.post(`devs/${id}/dislikes`, null, {
+	const handleDislike = async () => {
+		const [dev, ...rest] = devs
+		await api.post(`devs/${dev._id}/dislikes`, null, {
 			headers: {
 				user: id
 			}
 		})
-		setDevs(devs.filter(dev => dev._id !== id))
+		setDevs(rest)
 	}
 
 	const handleLogout = async () => {
@@ -84,10 +87,10 @@ const Main = ({ navigation }) => {
 			</CardsContainer>
 			{devs.length > 0 && (
 				<ButtonsContainer>
-					<Button>
+					<Button onPress={handleDislike}>
 						<Image source={dislike} />
 					</Button>
-					<Button>
+					<Button onPress={handleLike}>
 						<Image source={like} />
 					</Button>
 				</ButtonsContainer>
