@@ -14,11 +14,18 @@ import {
 	Logo,
 	ButtonsContainer,
 	Button,
-	Empty
+	Empty,
+	MatchContainer,
+	MatchName,
+	BioMatch,
+	CloseMatch,
+	MatchAvatar,
+	ImageMatch
 } from './styles'
 import logo from '../../assets/logo.png'
 import like from '../../assets/like.png'
 import dislike from '../../assets/dislike.png'
+import itsamatch from '../../assets/itsamatch.png'
 
 const Main = ({ navigation }) => {
 	const id = navigation.getParam('user')
@@ -106,6 +113,18 @@ const Main = ({ navigation }) => {
 						<Image source={like} />
 					</Button>
 				</ButtonsContainer>
+			)}
+
+			{matchDev && (
+				<MatchContainer>
+					<ImageMatch source={itsamatch} resizeMode="contain" />
+					<MatchAvatar source={{ uri: matchDev.avatar }} />
+					<MatchName>{matchDev.name}</MatchName>
+					<BioMatch>{matchDev.bio}</BioMatch>
+					<TouchableOpacity onPress={() => setMatchDev(null)}>
+						<CloseMatch>Fechar</CloseMatch>
+					</TouchableOpacity>
+				</MatchContainer>
 			)}
 		</Container>
 	)
